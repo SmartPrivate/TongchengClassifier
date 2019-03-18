@@ -6,6 +6,7 @@ import numpy as np
 import pymongo
 import jieba
 from tqdm import tqdm
+import os
 
 
 class TongChengDataSetGenerator(object):
@@ -157,6 +158,8 @@ class TongChengDataSetGenerator(object):
 
     def __save_feature_matrix(self, x_file_name, y_file_name):
         print('++++++正在写入npy文件++++++')
+        if not os.path.exists('feature_matrix_output'):
+            os.mkdir('feature_matrix_output')
         x_array = np.asarray(self.__x_list)
         y_array = np.asarray(self.__y_list)
         np.save('feature_matrix_output/{0}'.format(x_file_name), x_array)
